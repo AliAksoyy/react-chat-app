@@ -11,13 +11,13 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Wellcome");
-});
-
 app.use("/api/auth", authRouter);
 
-app.listen(PORT, async() => {
+// app.get("/", (req, res) => {
+//   res.send("Wellcome");
+// });
+
+app.listen(PORT, async () => {
   await createConnect();
   console.log("Server listening on port " + PORT);
 });
