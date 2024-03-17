@@ -12,4 +12,9 @@ const generateTokenAndSetCookie = (userId, res) => {
   });
 };
 
-module.exports = { generateTokenAndSetCookie };
+const decodeToken = (token) => {
+  const data = jwt.verify(token, process.env.JWT_SECRET);
+  return data;
+};
+
+module.exports = { generateTokenAndSetCookie, decodeToken };
