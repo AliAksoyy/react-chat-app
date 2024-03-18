@@ -24,8 +24,6 @@ const sendMessage = async (req, res) => {
       message,
     });
 
-    console.log(newMessage);
-
     if (newMessage) {
       conversation.messages.push(newMessage._id);
     }
