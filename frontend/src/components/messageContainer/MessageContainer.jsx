@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useConversation from "../../zustand/useConversation";
 import MessageContent from "./MessageContent";
 import MessageHeader from "./MessageHeader";
@@ -6,6 +7,11 @@ import { TiMessages } from "react-icons/ti";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
+
+  useEffect(() => {
+    return () => setSelectedConversation(null);
+  }, [setSelectedConversation]);
+
   return (
     <div className="md:min-w-[450px] flex flex-col">
       <>

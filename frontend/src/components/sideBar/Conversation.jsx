@@ -5,8 +5,8 @@ import useConversation from "../../zustand/useConversation";
 // eslint-disable-next-line react/prop-types
 const Conversation = ({ conversation, emoji, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
-  
 
+  console.log(selectedConversation);
   const isSelected = selectedConversation?._id === conversation._id;
   return (
     <>
