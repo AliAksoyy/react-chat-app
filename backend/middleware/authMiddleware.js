@@ -4,7 +4,8 @@ const authMiddleware = async (req, res, next) => {
   try {
     // let token = req.headers.cookie;
     // token = token.split("=")[1];
-    const token = req.cookies.token;
+    const token =
+      req.cookies.token || req.headers["authorization"].split("Bearer ")[1];
 
     if (!token) {
       return res

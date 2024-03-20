@@ -23,7 +23,7 @@ const useLogin = () => {
       if (data.error) {
         throw new Error(data.error);
       } else {
-        localStorage.setItem("chat-user", JSON.stringify(data));
+        localStorage.setItem("token", JSON.stringify(data.token));
         setAuthUser(data);
       }
     } catch (error) {

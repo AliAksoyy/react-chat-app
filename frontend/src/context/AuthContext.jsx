@@ -5,7 +5,7 @@ const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(
-    JSON.parse(localStorage.getItem("chat-user")) || null
+    JSON.parse(localStorage.getItem("token")) || null
   );
 
   return (
