@@ -6,8 +6,7 @@ const authMiddleware = async (req, res, next) => {
     // token = token.split("=")[1];
     const token =
       req.cookies.token || req.headers["authorization"].split("Bearer ")[1];
-    console.log("token", token);
-    console.log("req.cookies.token", req.cookies);
+
     if (!token) {
       return res
         .status(401)
