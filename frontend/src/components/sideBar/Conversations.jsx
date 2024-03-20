@@ -4,10 +4,10 @@ import { getRandomEmoji } from "../../utils/emojis";
 
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();
-  console.log(conversations);
+
 
   return (
-    <div className="flex flex-col py-2">
+    <div className="flex flex-col py-2 overflow-auto mb-3">
       {conversations?.map((conversation, idx) => {
         return (
           <Conversation
