@@ -29,14 +29,23 @@ const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generateTokenAndSetCookie(newUser._id, res);
+      const token = generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
-      res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        username: newUser.username,
-        profilePic: newUser.profilePic,
-      });
+      res
+        .cookie("token", token, {
+          maxAge: 15 * 24 * 60 * 60 * 1000,
+          // httpOnly: true, //!prevent Xss attacks cross-site scripting attacks
+          // sameSite: "strict", //? CSRF attacks cross-site forgery attacks
+          // secure: process.env.NODE_ENV !== "development",
+        })
+        .status(201)
+        .json({
+          _id: newUser._id,
+          fullName: newUser.fullName,
+          username: newUser.username,
+          profilePic: newUser.profilePic,
+          token,
+        });
     } else {
       res.status(400).json({ error: "Invalid user data" });
     }
@@ -58,14 +67,23 @@ const login = async (req, res) => {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
 
-    res.status(200).json({
-      _id: user._id,
-      fullName: user.fullName,
-      username: user.username,
-      profilePic: user.profilePic,
-    });
+    res
+      .cookie("token", token, {
+        maxAge: 15 * 24 * 60 * 60 * 1000,
+        // httpOnly: true, //!prevent Xss attacks cross-site scripting attacks
+        // sameSite: "strict", //? CSRF attacks cross-site forgery attacks
+        // secure: process.env.NODE_ENV !== "development",
+      })
+      .status(200)
+      .json({
+        _id: user._id,
+        fullName: user.fullName,
+        username: user.username,
+        profilePic: user.profilePic,
+        token,
+      });
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -75,7 +93,7 @@ const logout = async (req, res) => {
   try {
     res
       .status(200)
-      .cookie("jwt", "", { maxAge: 0 })
+      .cookie("token", "")
       .json({ message: "Logout Successfully" });
   } catch (error) {
     console.log("Error in signup controller", error.message);

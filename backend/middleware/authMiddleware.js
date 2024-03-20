@@ -4,7 +4,8 @@ const authMiddleware = async (req, res, next) => {
   try {
     // let token = req.headers.cookie;
     // token = token.split("=")[1];
-    const token = req.cookies.jwt;
+    const token = req.cookies.token;
+    console.log(token);
     if (!token) {
       return res
         .status(401)
