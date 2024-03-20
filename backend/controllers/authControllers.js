@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const { generateTokenAndSetCookie } = require("../utils/generateToken");
+const { response } = require("express");
 
 const signup = async (req, res) => {
   try {
@@ -101,4 +102,24 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = { login, logout, signup };
+const profile = async (req, res) => {
+  try {
+    const { _id } = req.user;
+
+    const user = await User.findOne({ _id });
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log("Error in signup controller", error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { login, logout, signup, profile };

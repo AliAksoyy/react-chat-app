@@ -1,16 +1,26 @@
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeleton/MessageSkeleton";
+import { useEffect, useRef } from "react";
 
 const MessageContent = () => {
   const { loading, messages } = useGetMessages();
+  const lastMessage = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      lastMessage?.current?.scrollIntoView({ behavior: "smooth" });
+    }, 200);
+  }, [messages]);
 
   return (
     <div className="px-4 flex-1 overflow-auto">
       {!loading &&
         messages.length !== 0 &&
         messages.map((message, index) => (
-          <Message key={index} message={message} />
+          <div ref={lastMessage} key={index}>
+            <Message message={message} />
+          </div>
         ))}
       {loading &&
         [...Array(3)].map((_, index) => <MessageSkeleton key={index} />)}
