@@ -14,7 +14,7 @@ const useGetConversations = () => {
       try {
         const res = await fetch("http://localhost:8000/api/users", {
           headers: {
-            Authorization: "Bearer " + authUser.token,
+            Authorization: "Bearer " + authUser,
           },
         });
         const data = await res.json();

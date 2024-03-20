@@ -24,7 +24,7 @@ const useLogin = () => {
         throw new Error(data.error);
       } else {
         localStorage.setItem("token", JSON.stringify(data.token));
-        setAuthUser(data);
+        setAuthUser(data.token);
       }
     } catch (error) {
       toast.error(error.message);
