@@ -36,11 +36,10 @@ const useSignup = () => {
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);
+      } else {
+        localStorage.setItem("chat-user", JSON.stringify(data));
+        setAuthUser(data);
       }
-
-      localStorage.setItem("chat-user", JSON.stringify(data));
-      setAuthUser(data);
-      
     } catch (error) {
       toast.error(error);
     } finally {

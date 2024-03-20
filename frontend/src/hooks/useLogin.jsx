@@ -20,16 +20,16 @@ const useLogin = () => {
       });
 
       const data = await res.json();
-      localStorage.setItem("chat-user", JSON.stringify(data));
-      setAuthUser(data);
-
       if (data.error) {
         throw new Error(data.error);
+      } else {
+        localStorage.setItem("chat-user", JSON.stringify(data));
+        setAuthUser(data);
       }
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   }
   return { loading, login };
