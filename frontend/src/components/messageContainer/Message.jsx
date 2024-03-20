@@ -18,7 +18,7 @@ const Message = ({ message }) => {
   const bubleBgColor = formMe ? "bg-blue-500" : "";
   return (
     <>
-      <div className={`chat ${chatClassName}`}>
+      <div className={`chat ${chatClassName} `}>
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
             <img alt="Tailwind CSS chat bubble component" src={profilePic} />
@@ -27,7 +27,7 @@ const Message = ({ message }) => {
         <div className={`chat-bubble text-white max-w-60 overflow-clip ${bubleBgColor}`}>
           {message.message}
         </div>
-        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center text-gray-100 pt-1">
+        <div className="chat-footer opacity-50 text-xs  flex gap-1 items-center text-gray-100 pt-1">
           {extractTime(message.createdAt)}
         </div>
       </div>
