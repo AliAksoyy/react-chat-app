@@ -9,7 +9,7 @@ const useGetMessages = () => {
 
   useEffect(() => {
     async function getMessages() {
-      setLoading(false);
+      setLoading(true);
       try {
         const res = await fetch(
           `http://localhost:8000/api/messages/${selectedConversation._id}`,
