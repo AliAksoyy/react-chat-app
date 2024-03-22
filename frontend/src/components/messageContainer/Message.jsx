@@ -10,7 +10,6 @@ const Message = ({ message }) => {
 
   // eslint-disable-next-line react/prop-types
   const formMe = message.senderId == userProfile._id;
-  console.log(formMe);
   const chatClassName = formMe ? "chat-end" : "chat-start";
   const profilePic = formMe
     ? userProfile.profilePic
