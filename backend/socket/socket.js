@@ -18,7 +18,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("Connection closed socketId" + socket.id);
-    socket.close();
+    socket.conn.close();
   });
 });
 
