@@ -8,8 +8,8 @@ const cookieParser = require("cookie-parser");
 const messageRouter = require("./routes/messageRouter");
 const userRouter = require("./routes/userRouter");
 const cors = require("cors");
+const { app, server } = require("./socket/socket");
 
-const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,7 @@ app.use("/api/users", userRouter);
 //   res.send("Wellcome");
 // });
 
-app.listen(PORT, async () => {
+server.listen(PORT, async () => {
   await createConnect();
   console.log("Server listening on port " + PORT);
 });
