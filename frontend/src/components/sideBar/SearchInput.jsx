@@ -20,7 +20,6 @@ const SearchInput = () => {
         .toLowerCase()
         .includes(searchName.toLowerCase());
     });
-    console.log(conversation);
     if (conversation?.length > 0) {
       setSelectedConversation(conversation[0]);
       setSearchName("");
