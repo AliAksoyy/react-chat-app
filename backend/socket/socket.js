@@ -13,7 +13,14 @@ const io = new Server(server, {
   },
 });
 
+const getReceiverSocketId = (receiverId) => {
+  console.log("ali", receiverId);
+  return userSocketMap[receiverId];
+};
+
 const userSocketMap = {};
+
+console.log("userSocketMap", userSocketMap);
 
 io.on("connection", (socket) => {
   console.log("Connection established socketId" + socket.id);
@@ -34,4 +41,4 @@ io.on("connection", (socket) => {
   });
 });
 
-module.exports = { app, server, io };
+module.exports = { app, server, io, getReceiverSocketId };

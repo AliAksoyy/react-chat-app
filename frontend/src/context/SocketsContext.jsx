@@ -20,7 +20,6 @@ const SocketsContextProvider = ({ children }) => {
       });
       setSocket(socket);
       socket.on("getOnlineUsers", (users) => {
-        console.log(users)
         setOnlineUsers(users);
       });
 
@@ -32,8 +31,6 @@ const SocketsContextProvider = ({ children }) => {
       }
     }
   }, [userProfile]);
-
-  console.log(socket);
 
   return (
     <SocketsContext.Provider value={{ socket, onlineUsers }}>
