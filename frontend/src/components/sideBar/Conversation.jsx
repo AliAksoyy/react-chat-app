@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { useSocketsContext } from "../../context/SocketsContext";
 import useConversation from "../../zustand/useConversation";
 
 // eslint-disable-next-line react/prop-types
@@ -7,6 +8,9 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
   const isSelected = selectedConversation?._id === conversation._id;
+  const { onlineUsers } = useSocketsContext();
+  const isOnline = onlineUsers.includes(conversation._id);
+  console.log("isOnline", isOnline);
   return (
     <>
       <div
@@ -15,7 +19,7 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
           isSelected ? "bg-sky-500" : ""
         }`}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-12 rounded-full">
             <img src={conversation.profilePic} />
           </div>
